@@ -1,0 +1,48 @@
+unit NetParam;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Mask;
+
+type
+  TNetParamForm = class(TForm)
+    IPLable: TLabel;
+    PortLable: TLabel;
+    IPEdit: TMaskEdit;
+    PortEdit: TMaskEdit;
+    ApplyParButtom: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure ApplyParButtomClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  NetParamForm: TNetParamForm;
+
+implementation
+uses main;
+{$R *.dfm}
+
+procedure TNetParamForm.FormCreate(Sender: TObject);
+var s: string;
+begin
+IPEdit.Text:=NIP;
+s:=IntToStr(NPort);
+while length(s)<> 4 do
+ s:='0'+s;
+PortEdit.Text:=s;
+end;
+
+procedure TNetParamForm.ApplyParButtomClick(Sender: TObject);
+begin
+NPort:=StrToInt(PortEdit.Text);
+NIP:=IPEdit.Text;
+Close;
+end;
+
+end.
